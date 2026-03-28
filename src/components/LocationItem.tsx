@@ -1,0 +1,113 @@
+import React from 'react';
+import { Navigation, MapPin, Utensils, Car, Hotel, Info, Tag, ShoppingBag, UtensilsCrossed, Key } from 'lucide-react';
+import { Location } from '../data/itinerary';
+import { cn } from '../lib/utils';
+import { motion } from 'motion/react';
+
+interface LocationItemProps {
+  location: Location;
+}
+
+export const LocationItem: React.FC<LocationItemProps> = ({ location }) => {
+  const openNav = () => {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${location.coordinates.lat},${location.coordinates.lng}`;
+    window.open(url, '_blank');
+  };
+
+  const getIcon = () => {
+    switch (location.type) {
+      case 'sight': return <MapPin className="w-5 h-5" />;
+      case 'restaurant': return <Utensils className="w-5 h-5" />;
+      case 'transport': return <Car className="w-5 h-5" />;
+      case 'hotel': return <Hotel className="w-5 h-5" />;
+      default: return <Info className="w-5 h-5" />;
+    }
+  };
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="relative pl-8 pb-10 last:pb-0 border-l border-gray-200 ml-3"
+    >
+      {/* Timeline Dot */}
+      <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-white border-2 border-ink z-10" />
+      
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-bold tracking-widest text-accent uppercase">{location.time}</span>
+          <button 
+            onClick={openNav}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ink text-white text-[10px] font-medium hover:bg-opacity-80 transition-all active:scale-95"
+          >
+            <Navigation className="w-3 h-3" />
+            導航
+          </button>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-bold serif leading-tight mb-0.5">{location.name}</h3>
+          <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">{location.nameEn}</p>
+          <p className="text-sm text-accent leading-relaxed">{location.description}</p>
+        </div>
+
+        {/* Tags & Insights */}
+        <div className="flex flex-wrap gap-2 mt-1">
+          {location.bookingCode && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-red-50 text-important border border-red-100 rounded text-[10px] font-bold">
+              <Key className="w-3 h-3" />
+              預約代號: {location.bookingCode}
+            </div>
+          )}
+          {location.mustEat?.map((item, i) => (
+            <div key={i} className="flex items-center gap-1 px-2 py-0.5 bg-orange-50 text-must-eat border border-orange-100 rounded text-[10px] font-bold">
+              <UtensilsCrossed className="w-3 h-3" />
+              必吃: {item}
+            </div>
+          ))}
+          {location.mustBuy?.map((item, i) => (
+            <div key={i} className="flex items-center gap-1 px-2 py-0.5 bg-green-50 text-must-buy border border-green-100 rounded text-[10px] font-bold">
+              <ShoppingBag className="w-3 h-3" />
+              必買: {item}
+            </div>
+          ))}
+        </div>
+
+        {location.story && (
+          <div className="mt-2 p-3 bg-gray-50 rounded-lg border-l-2 border-accent italic text-xs text-accent leading-relaxed">
+            <span className="font-bold block mb-1 not-italic text-[10px] uppercase tracking-wider">景點故事</span>
+            「{location.story}」
+          </div>
+        )}
+
+        {location.tips && location.tips.length > 0 && (
+          <div className="flex flex-col gap-1 mt-1">
+            {location.tips.map((tip, i) => (
+              <div key={i} className="flex items-start gap-2 text-[11px] text-accent">
+                <div className="mt-1 w-1 h-1 rounded-full bg-accent shrink-0" />
+                <span>{tip}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {location.driveInfo && (
+          <div className="mt-4 flex items-center gap-3 py-2 px-3 bg-gray-50 rounded-xl border border-gray-100">
+            <div className="p-2 bg-white rounded-full shadow-sm">
+              <Car className="w-3.5 h-3.5 text-ink" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">Next Drive</span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-ink">{location.driveInfo.time}</span>
+                <div className="w-1 h-1 rounded-full bg-gray-300" />
+                <span className="text-xs text-gray-500">{location.driveInfo.distance}</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+};

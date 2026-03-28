@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Noto Sans TC", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif TC", serif;
+  
+  --color-paper: #F9F8F6;
+  --color-ink: #1A1A1A;
+  --color-accent: #8C8C8C;
+  --color-must-eat: #E67E22;
+  --color-must-buy: #27AE60;
+  --color-important: #C0392B;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.serif {
+  font-family: var(--font-serif);
+}
+
+/* Hide scrollbar for clean app feel */
+::-webkit-scrollbar {
+  display: none;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}

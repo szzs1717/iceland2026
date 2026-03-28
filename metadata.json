@@ -1,0 +1,5 @@
+{
+  "name": "Iceland Odyssey | 冰島極簡冒險",
+  "description": "專為自駕設計的冰島行程網站，結合導航、天氣與深度景點攻略。",
+  "requestFramePermissions": ["geolocation"]
+}
