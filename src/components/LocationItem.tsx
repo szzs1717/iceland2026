@@ -54,10 +54,16 @@ export const LocationItem: React.FC<LocationItemProps> = ({ location }) => {
 
         {/* Tags & Insights */}
         <div className="flex flex-wrap gap-2 mt-1">
-          {location.bookingCode && (
-            <div className="flex items-center gap-1 px-2 py-0.5 bg-red-50 text-important border border-red-100 rounded text-[10px] font-bold">
-              <Key className="w-3 h-3" />
-              預約代號: {location.bookingCode}
+          {location.stayDuration && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded text-[10px] font-bold">
+              <Hotel className="w-3 h-3" />
+              住宿: {location.stayDuration} 晚
+            </div>
+          )}
+          {location.breakfastIncluded && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded text-[10px] font-bold">
+              <Utensils className="w-3 h-3" />
+              包早餐
             </div>
           )}
           {location.mustEat?.map((item, i) => (

@@ -12,6 +12,7 @@ interface MapComponentProps {
 
 export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedLocation, onSelectLocation }) => {
   const transformComponentRef = useRef<ReactZoomPanPinchRef>(null);
+  const [scale, setScale] = React.useState(1);
 
   // Iceland bounding box for mapping coordinates to SVG
   const bounds = {
@@ -42,18 +43,6 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
   const markers = useMemo(() => {
     return locations.filter(l => l.type === 'sight' || l.type === 'hotel' || l.type === 'restaurant');
   }, [locations]);
-
-  const majorCities = [
-    { name: "Reykjavík", lat: 64.1466, lng: -21.9426 },
-    { name: "Akureyri", lat: 65.6835, lng: -18.0879 },
-    { name: "Vík", lat: 63.4194, lng: -19.0060 },
-    { name: "Höfn", lat: 64.2539, lng: -15.2082 },
-    { name: "Keflavík", lat: 63.9994, lng: -22.5583 },
-    { name: "KEF Airport", lat: 63.9850, lng: -22.6056 },
-    { name: "Egilsstaðir", lat: 65.2669, lng: -14.3948 },
-    { name: "Ísafjörður", lat: 66.0749, lng: -23.1251 },
-    { name: "Selfoss", lat: 63.9335, lng: -21.0013 }
-  ];
 
   const regions = [
     { name: "Westfjords", lat: 65.9, lng: -22.5 },
@@ -92,6 +81,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
           centerOnInit={true}
           doubleClick={{ disabled: false }}
           panning={{ velocityDisabled: true }}
+          onTransformed={(ref) => setScale(ref.state.scale)}
         >
           <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
             <svg 
@@ -143,104 +133,88 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                     x={pos.x}
                     y={pos.y}
                     textAnchor="middle"
-                    className="text-[1.8px] font-bold uppercase fill-[#666] serif opacity-40 pointer-events-none"
-                    style={{ letterSpacing: '0.15em' }}
+                    className="font-bold uppercase fill-[#666] serif opacity-40 pointer-events-none"
+                    style={{ 
+                      letterSpacing: '0.15em',
+                      fontSize: `${Math.max(0.8, 1.8 / Math.sqrt(scale))}px`
+                    }}
                   >
                     {region.name}
                   </text>
                 );
               })}
 
-              {/* Major Cities (Background Labels) */}
-              {majorCities.map((city) => {
-                const pos = project(city.lat, city.lng);
+              {/* Inactive Markers Layer */}
+              {markers.filter(loc => selectedLocation?.id !== loc.id).map((loc) => {
+                const pos = project(loc.coordinates.lat, loc.coordinates.lng);
                 return (
-                  <g key={city.name} className="pointer-events-none opacity-40">
-                    <circle cx={pos.x} cy={pos.y} r="0.4" fill="#A6A295" />
-                    <text
-                      x={pos.x}
-                      y={pos.y + 2}
-                      textAnchor="middle"
-                      className="text-[2.5px] font-bold uppercase tracking-widest fill-[#8C8C8C] serif"
-                    >
-                      {city.name}
-                    </text>
-                  </g>
+                  <circle
+                    key={loc.id}
+                    cx={pos.x}
+                    cy={pos.y}
+                    r={1}
+                    fill="#8C8C8C"
+                    className="cursor-pointer hover:fill-[#1A1A1A] transition-colors duration-300"
+                    onClick={() => onSelectLocation?.(loc)}
+                  />
                 );
               })}
 
-              {/* Markers */}
-              {markers.map((loc) => {
+              {/* Active Marker & Labels Layer (Top-most) */}
+              {selectedLocation && (() => {
+                const loc = selectedLocation;
                 const pos = project(loc.coordinates.lat, loc.coordinates.lng);
-                const isSelected = selectedLocation?.id === loc.id;
-                
                 return (
                   <g key={loc.id} id={`marker-${loc.id}`}>
-                    {/* Connection Line (if selected) */}
-                    <AnimatePresence>
-                      {isSelected && (
-                        <motion.circle
-                          cx={pos.x}
-                          cy={pos.y}
-                          r="4"
-                          fill="none"
-                          stroke="#1A1A1A"
-                          strokeWidth="0.2"
-                          strokeDasharray="1 1"
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 0.3 }}
-                          exit={{ scale: 0, opacity: 0 }}
-                        />
-                      )}
-                    </AnimatePresence>
-
-                    {/* Marker Dot */}
+                    {/* Connection Line */}
                     <motion.circle
                       cx={pos.x}
                       cy={pos.y}
-                      r={isSelected ? 1.5 : 1}
-                      fill={isSelected ? "#1A1A1A" : "#8C8C8C"}
-                      className="cursor-pointer transition-colors duration-300"
-                      whileHover={{ scale: 1.5 }}
-                      onClick={() => onSelectLocation?.(loc)}
-                      animate={{ 
-                        scale: isSelected ? 1.2 : 1,
-                        fill: isSelected ? "#1A1A1A" : "#8C8C8C"
-                      }}
+                      r="4"
+                      fill="none"
+                      stroke="#1A1A1A"
+                      strokeWidth="0.2"
+                      strokeDasharray="1 1"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 0.3 }}
                     />
 
-                    {/* Label (only for selected or on hover) */}
-                    <AnimatePresence>
-                      {isSelected && (
-                        <motion.g
-                          initial={{ opacity: 0, y: 2 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 2 }}
-                        >
-                          <text
-                            x={pos.x}
-                            y={pos.y - 6}
-                            textAnchor="middle"
-                            className="text-[8px] font-black serif fill-ink"
-                            style={{ filter: 'drop-shadow(0px 1px 1px rgba(255,255,255,0.9))' }}
-                          >
-                            {loc.name}
-                          </text>
-                          <text
-                            x={pos.x}
-                            y={pos.y - 3}
-                            textAnchor="middle"
-                            className="text-[4px] font-bold uppercase tracking-widest fill-gray-500 serif"
-                            style={{ filter: 'drop-shadow(0px 1px 1px rgba(255,255,255,0.9))' }}
-                          >
-                            {loc.nameEn}
-                          </text>
-                        </motion.g>
-                      )}
-                    </AnimatePresence>
+                    {/* Active Marker Dot */}
+                    <motion.circle
+                      cx={pos.x}
+                      cy={pos.y}
+                      r={1.5}
+                      fill="#1A1A1A"
+                      animate={{ scale: 1.2 }}
+                    />
+
+                    {/* Active Labels */}
+                    <motion.g
+                      initial={{ opacity: 0, y: 2 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      <text
+                        x={pos.x}
+                        y={pos.y - 6}
+                        textAnchor="middle"
+                        className="text-[8px] font-black serif fill-ink"
+                        style={{ filter: 'drop-shadow(0px 1px 1px rgba(255,255,255,0.9))' }}
+                      >
+                        {loc.name}
+                      </text>
+                      <text
+                        x={pos.x}
+                        y={pos.y - 3}
+                        textAnchor="middle"
+                        className="text-[4px] font-bold uppercase tracking-widest fill-gray-500 serif"
+                        style={{ filter: 'drop-shadow(0px 1px 1px rgba(255,255,255,0.9))' }}
+                      >
+                        {loc.nameEn}
+                      </text>
+                    </motion.g>
                   </g>
                 );
-              })}
+              })()}
             </svg>
           </TransformComponent>
         </TransformWrapper>

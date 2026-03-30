@@ -12,8 +12,9 @@ export interface Location {
   tips?: string[];
   mustEat?: string[];
   mustBuy?: string[];
-  bookingCode?: string;
   story?: string;
+  breakfastIncluded?: boolean;
+  stayDuration?: number;
   driveInfo?: { time: string; distance: string };
 }
 
@@ -116,7 +117,6 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 64.147, lng: -21.938 },
         imageUrl: 'https://images.unsplash.com/photo-1551739440-5dd934d3a94a?q=80&w=800&auto=format&fit=crop',
         mustEat: ['海鮮拼盤 (Seafood Pan)', '北極紅點鮭 (Arctic Charr)'],
-        bookingCode: 'ID: 8527984',
         driveInfo: { time: '10 min', distance: '2 km' }
       },
       {
@@ -215,7 +215,8 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'hotel',
         coordinates: { lat: 64.325, lng: -20.129 },
         imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop',
-        mustEat: ['傳統冰島晚餐 (Traditional Icelandic Food)']
+        mustEat: ['傳統冰島晚餐 (Traditional Icelandic Food)'],
+        breakfastIncluded: true
       }
     ]
   },
@@ -289,7 +290,8 @@ export const ITINERARY_DATA: DayPlan[] = [
         description: '這不只是一家旅舍，還是一個藝術中心。今晚我們就在充滿文青氣息的氛圍中入睡。',
         type: 'hotel',
         coordinates: { lat: 64.91, lng: -23.81 },
-        imageUrl: 'https://images.unsplash.com/photo-1555854816-802f188095e4?q=80&w=800&auto=format&fit=crop'
+        imageUrl: 'https://images.unsplash.com/photo-1555854816-802f188095e4?q=80&w=800&auto=format&fit=crop',
+        breakfastIncluded: true
       },
       {
         id: 'matarlist',
@@ -353,7 +355,9 @@ export const ITINERARY_DATA: DayPlan[] = [
         description: '阿庫雷里的現代化公寓。今晚我們就在這個北方之都好好休息。',
         type: 'hotel',
         coordinates: { lat: 65.68, lng: -18.09 },
-        imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop'
+        imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop',
+        stayDuration: 2,
+        breakfastIncluded: true
       },
       {
         id: 'idunn-matholl',
@@ -481,7 +485,8 @@ export const ITINERARY_DATA: DayPlan[] = [
         description: '這以前真的是一家牛奶工廠！現在變成了時尚旅店。希望今晚的夢裡有喝不完的牛奶（或者啤酒）。',
         type: 'hotel',
         coordinates: { lat: 64.25, lng: -15.21 },
-        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop'
+        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop',
+        breakfastIncluded: true
       },
       {
         id: 'pakkhus-dinner',
@@ -568,7 +573,9 @@ export const ITINERARY_DATA: DayPlan[] = [
         description: '今晚住在南岸。飯店周圍都是壯麗的風景，適合放空。',
         type: 'hotel',
         coordinates: { lat: 63.46, lng: -19.14 },
-        imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop'
+        imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop',
+        stayDuration: 2,
+        breakfastIncluded: true
       },
       {
         id: 'dyrholaey-dinner',
@@ -744,7 +751,8 @@ export const ITINERARY_DATA: DayPlan[] = [
         description: '最後一晚住在機場旁邊。收拾好行李，也收拾好心情。冰島，我們一定會再回來的！',
         type: 'hotel',
         coordinates: { lat: 63.99, lng: -22.62 },
-        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop'
+        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop',
+        breakfastIncluded: true
       }
     ]
   },
