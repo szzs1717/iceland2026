@@ -15,6 +15,9 @@ export interface Location {
   story?: string;
   breakfastIncluded?: boolean;
   stayDuration?: number;
+  precautions?: string[];
+  bookingNotes?: string[];
+  waterproofRequired?: boolean;
   driveInfo?: { time: string; distance: string };
 }
 
@@ -81,6 +84,7 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 63.985, lng: -22.6056 },
         imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
         tips: ['檢查是否有沙塵險與碎石險', '開門時請務必抓緊車門！'],
+        precautions: ['冰島強風可能吹損車門，開啟時請雙手緊握', '停車時盡量逆風停放'],
         driveInfo: { time: '45 min', distance: '45 km' }
       },
       {
@@ -128,7 +132,14 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 64.118, lng: -21.933 },
         imageUrl: 'https://images.unsplash.com/photo-1644144573177-38662999718f?q=80&w=800&auto=format&fit=crop',
-        tips: ['包含 Sky Ritual 體驗', '記得在吧台領取你的迎賓飲料'],
+        tips: [
+          '包含 Sky Ritual 體驗', 
+          '記得在吧台領取你的迎賓飲料', 
+          '地址: Vesturvör 44-48, Kópavogur',
+          '電話: +354 527 6800'
+        ],
+        bookingNotes: ['攜帶泳衣及防水手機袋 (Swimwear & waterproof cellphone case)'],
+        precautions: ['泡溫泉前請先徹底淋浴', '長頭髮建議塗抹護髮乳或紮起，避免矽粉造成頭髮乾澀'],
         driveInfo: { time: '20 min', distance: '10 km' }
       },
       {
@@ -204,6 +215,17 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 64.5, lng: -20.2 },
         imageUrl: 'https://images.unsplash.com/photo-1530652101053-8c0db4fbb5de?q=80&w=800&auto=format&fit=crop',
+        tips: [
+          '集合地點: Gullfoss Cafe 停車場 (Mountaineers of Iceland)',
+          '電話: +354 580 9900'
+        ],
+        bookingNotes: [
+          '必須攜帶駕駛執照 (Driver\'s License)', 
+          '穿著防水外套與長褲', 
+          '攜帶零食、毛帽、登山鞋、手套、厚襪'
+        ],
+        waterproofRequired: true,
+        precautions: ['務必聽從嚮導指示，切勿離開安全範圍', '駕駛雪地摩托車請保持安全距離'],
         driveInfo: { time: '1.5 hr', distance: '80 km' }
       },
       {
@@ -322,6 +344,7 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 64.941, lng: -23.306 },
         imageUrl: 'https://images.unsplash.com/photo-1476610182048-b716b8518aae?q=80&w=800&auto=format&fit=crop',
         story: '《冰與火之歌》中的箭頭山取景地。',
+        precautions: ['請勿在非法區域放無人機 (Drone)', '步道可能濕滑，注意腳下安全'],
         driveInfo: { time: '1.5 hr', distance: '100 km' }
       },
       {
@@ -398,6 +421,13 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 65.68, lng: -18.09 },
         imageUrl: 'https://images.unsplash.com/photo-1568430462989-44163eb1752f?q=80&w=800&auto=format&fit=crop',
+        tips: [
+          '門票辦公室: Oddeyrarbot 2, 600 Akureyri (Elding)',
+          '電話: +354 497 1000'
+        ],
+        bookingNotes: ['攜帶帽子、手套與圍巾 (Hat, gloves & scarf)'],
+        waterproofRequired: true,
+        precautions: ['建議提前 30 分鐘報到', '船上風大極冷，請穿著防風防水保暖衣物', '若容易暈船，請提前 1 小時服用暈船藥'],
         driveInfo: { time: '45 min', distance: '50 km' }
       },
       {
@@ -464,6 +494,8 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 65.81, lng: -16.38 },
         imageUrl: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=800&auto=format&fit=crop',
         story: '電影《普羅米修斯》開場的取景地。',
+        waterproofRequired: true,
+        precautions: ['瀑布水量巨大，靠近時會有強烈的水氣與風壓', '相機與手機建議做好防水措施'],
         driveInfo: { time: '1.5 hr', distance: '100 km' }
       },
       {
@@ -517,6 +549,14 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 64.04, lng: -16.17 },
         imageUrl: 'https://images.unsplash.com/photo-1520113412646-04fc68c0bc21?q=80&w=800&auto=format&fit=crop',
+        tips: [
+          '地點: Jokulsarlon Glacier Lagoon boat Tours & Café',
+          '電話: +354 478 2222'
+        ],
+        bookingNotes: [
+          '穿著保暖衣物 (Warm Clothing)', 
+          '準備電子或紙本憑證 (Mobile or printed voucher)'
+        ],
         driveInfo: { time: '15 min', distance: '1 km' }
       },
       {
@@ -606,6 +646,7 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 63.40, lng: -19.04 },
         imageUrl: 'https://images.unsplash.com/photo-1504893524553-f8591ce2b0dd?q=80&w=800&auto=format&fit=crop',
         tips: ['小心瘋狗浪，切勿背對海洋'],
+        precautions: ['絕對不可背對海洋拍照', '瘋狗浪隨時可能出現，請保持與水面 30 公尺以上的距離'],
         driveInfo: { time: '45 min', distance: '50 km' }
       },
       {
@@ -617,6 +658,13 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 63.45, lng: -19.36 },
         imageUrl: 'https://images.unsplash.com/photo-1498354136128-58f790194fa7?q=80&w=800&auto=format&fit=crop',
+        tips: [
+          '集合點: Solheimasandur Parking Lot (Reykjavik Excursions)'
+        ],
+        bookingNotes: [
+          '穿著保暖衣物 (Warm Clothing)', 
+          '準備電子或紙本憑證 (接駁車使用)'
+        ],
         driveInfo: { time: '30 min', distance: '15 km' }
       },
       {
@@ -651,7 +699,9 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 63.61, lng: -19.98 },
         imageUrl: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=800&auto=format&fit=crop',
-        tips: ['步道濕滑，請穿著防滑鞋', '建議穿著防水外套'],
+        tips: ['可以帶一條備用毛巾'],
+        waterproofRequired: true,
+        precautions: ['步道極度濕滑，必須穿著防滑效果佳的登山鞋', '建議穿著完整的防水外衣與雨褲', '瀑布後方水煙極大，請保護好電子設備'],
         driveInfo: { time: '10 min', distance: '2 km' }
       },
       {
@@ -664,6 +714,8 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 63.62, lng: -19.98 },
         imageUrl: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=800&auto=format&fit=crop',
         tips: ['進入岩縫需涉水，請穿著防水鞋', '相機請做好防護'],
+        waterproofRequired: true,
+        precautions: ['水氣極重，手機與相機需額外防水保護', '進入岩縫的路段濕滑且需踩水石'],
         driveInfo: { time: '2 hr', distance: '130 km' }
       },
       {
@@ -729,6 +781,15 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 63.88, lng: -22.44 },
         imageUrl: 'https://images.unsplash.com/photo-1501133512628-f190c4405468?q=80&w=800&auto=format&fit=crop',
+        tips: [
+          '地址: Norðurljósavegur 9, 240 Grindavík',
+          '電話: +354 420 8800'
+        ],
+        bookingNotes: [
+          '攜帶泳衣、防水手機袋', 
+          '準備電子或紙本憑證 (Mobile or printed voucher)'
+        ],
+        precautions: ['建議每 15-20 分鐘起身休息並補充水分', '避免佩戴銀飾進入泉水，以免變色'],
         driveInfo: { time: '45 min', distance: '50 km' }
       },
       {

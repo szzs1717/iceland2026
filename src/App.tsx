@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Compass, Calendar, Map, Info, ChevronRight, Menu, X, Share2, ArrowRight, Sun, Sunrise, Sunset, Filter, RefreshCw, Coins } from 'lucide-react';
+import { Compass, Calendar, Map, Info, ChevronRight, Menu, X, Share2, ArrowRight, Sun, Sunrise, Sunset, Filter, RefreshCw, Coins, Tag, Droplets } from 'lucide-react';
 import { ITINERARY_DATA, DayPlan } from './data/itinerary';
 import { LocationItem } from './components/LocationItem';
 import { WeatherWidget } from './components/WeatherWidget';
@@ -310,6 +310,49 @@ export default function App() {
                 <p className="text-sm text-gray-600 leading-relaxed">
                   這是一份為期 11 天的冰島自駕探險計畫。涵蓋了雷克雅維克、金圈、斯奈山半島、北部阿庫雷里、米湖以及壯麗的南岸。
                 </p>
+              </div>
+              <div className="p-6 rounded-2xl bg-gray-50">
+                <h3 className="font-bold mb-4 flex items-center gap-2">
+                  <Droplets className="w-4 h-4 text-blue-500" />
+                  5-6月防水建議 (Waterproof Specs)
+                </h3>
+                <div className="space-y-4">
+                  <p className="text-[11px] text-gray-500 leading-relaxed italic">
+                    冰島的 5-6 月雖然步入夏季，但仍常有強風大雨。以下景點因水氣極重，建議務必穿著全套防水衣 (外套+長褲)：
+                  </p>
+                  <ul className="text-[11px] text-gray-600 space-y-2 list-disc list-inside bg-blue-50/50 p-3 rounded-xl border border-blue-100">
+                    <li><span className="font-bold">塞里雅蘭瀑布：</span>需穿過水簾，保證全濕。</li>
+                    <li><span className="font-bold">秘密瀑布：</span>需進入岩縫，像在雨中行走。</li>
+                    <li><span className="font-bold">黛提瀑布：</span>歐洲水量之王，噴濺範圍極廣。</li>
+                    <li><span className="font-bold">冰河湖/賞鯨：</span>受海風與浪花影響，防水層可擋風保暖。</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl bg-gray-50">
+                <h3 className="font-bold mb-4 flex items-center gap-2">
+                  <Tag className="w-4 h-4 text-emerald-500" />
+                  活動裝備與注意事項
+                </h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-xs font-bold text-accent uppercase tracking-wider mb-2">穿著裝備 (Hiking & General)</h4>
+                    <ul className="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside bg-white p-3 rounded-xl border border-gray-100">
+                      <li><span className="font-bold">底層：</span>排汗透氣內衣 (避免棉質)</li>
+                      <li><span className="font-bold">中層：</span>保暖刷毛或輕量羽絨</li>
+                      <li><span className="font-bold">外層：</span>防風防水 GORE-TEX 外套與雨褲</li>
+                      <li><span className="font-bold">鞋子：</span>高筒防水、抓地力強的登山鞋</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-accent uppercase tracking-wider mb-2">戶外活動須知 (Outdoor Activities)</h4>
+                    <ul className="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside bg-white p-3 rounded-xl border border-gray-100">
+                      <li>冰川健行必須穿著嚮導提供的專業冰爪 (Crampons)。</li>
+                      <li>賞鯨活動建議穿著船家提供的保暖連身衣，海風極冷。</li>
+                      <li>所有活動均受天氣影響，如遇強風警告，請務必留在室內。</li>
+                      <li>保持距離：海豹、小羊及野生冰島馬請勿隨意觸摸或餵食。</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               <div className="p-6 rounded-2xl bg-gray-50">
                 <h3 className="font-bold mb-2 flex items-center gap-2">

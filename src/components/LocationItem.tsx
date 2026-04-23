@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation, MapPin, Utensils, Car, Hotel, Info, Tag, ShoppingBag, UtensilsCrossed, Key } from 'lucide-react';
+import { Navigation, MapPin, Utensils, Car, Hotel, Info, Tag, ShoppingBag, UtensilsCrossed, Key, AlertTriangle, Droplets } from 'lucide-react';
 import { Location } from '../data/itinerary';
 import { cn } from '../lib/utils';
 import { motion } from 'motion/react';
@@ -66,6 +66,12 @@ export const LocationItem: React.FC<LocationItemProps> = ({ location }) => {
               包早餐
             </div>
           )}
+          {location.waterproofRequired && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded text-[10px] font-bold">
+              <Droplets className="w-3 h-3" />
+              必備防水衣物
+            </div>
+          )}
           {location.mustEat?.map((item, i) => (
             <div key={i} className="flex items-center gap-1 px-2 py-0.5 bg-orange-50 text-must-eat border border-orange-100 rounded text-[10px] font-bold">
               <UtensilsCrossed className="w-3 h-3" />
@@ -93,6 +99,36 @@ export const LocationItem: React.FC<LocationItemProps> = ({ location }) => {
               <div key={i} className="flex items-start gap-2 text-[11px] text-accent">
                 <div className="mt-1 w-1 h-1 rounded-full bg-accent shrink-0" />
                 <span>{tip}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {location.bookingNotes && location.bookingNotes.length > 0 && (
+          <div className="mt-2 p-3 bg-red-50 rounded-lg border-l-2 border-red-500 flex flex-col gap-1.5">
+            <div className="flex items-center gap-1.5 text-red-700 font-bold text-[10px] uppercase tracking-wider">
+              <Key className="w-3 h-3" />
+              必備項目 / 憑證 (Booking Essential)
+            </div>
+            {location.bookingNotes.map((item, i) => (
+              <div key={i} className="flex items-start gap-2 text-[11px] text-red-700 font-bold leading-relaxed">
+                <div className="mt-1.5 w-1 h-1 rounded-full bg-red-400 shrink-0" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {location.precautions && location.precautions.length > 0 && (
+          <div className="mt-2 p-3 bg-gray-50 rounded-lg border-l border-gray-100 flex flex-col gap-1.5">
+            <div className="flex items-center gap-1.5 text-gray-500 font-bold text-[9px] uppercase tracking-wider">
+              <Info className="w-3 h-3" />
+              注意事項
+            </div>
+            {location.precautions.map((item, i) => (
+              <div key={i} className="flex items-start gap-2 text-[11px] text-gray-600 leading-relaxed">
+                <div className="mt-1.5 w-1 h-1 rounded-full bg-gray-300 shrink-0" />
+                <span>{item}</span>
               </div>
             ))}
           </div>
