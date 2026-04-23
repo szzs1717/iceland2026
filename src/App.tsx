@@ -14,19 +14,30 @@ export default function App() {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [filter, setFilter] = useState<'all' | 'sight' | 'restaurant' | 'hotel'>('all');
   const [resetMapKey, setResetMapKey] = useState(0);
-  const [exchangeRates, setExchangeRates] = useState<{HKD: number, CAD: number, USD: number} | null>(null);
+  const [exchangeRates, setExchangeRates] = useState<{HKD: number, CAD: number, USD: number} | null>({
+    HKD: 0.057,
+    CAD: 0.0099,
+    USD: 0.0071
+  });
   const [inputAmount, setInputAmount] = useState<string>('1000');
   const [targetCurrency, setTargetCurrency] = useState<'HKD' | 'CAD' | 'USD'>('HKD');
 
   useEffect(() => {
+    // Attempt to fetch fresh exchange rates
     fetch('https://api.frankfurter.app/latest?from=ISK&to=HKD,CAD,USD')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('API response not OK');
+        return res.json();
+      })
       .then(data => {
         if (data && data.rates) {
           setExchangeRates(data.rates);
         }
       })
-      .catch(err => console.error('Failed to fetch exchange rates', err));
+      .catch(err => {
+        console.warn('Failed to fetch fresh exchange rates, using default values', err);
+        // We already have fallback values in initial state, so no action needed here
+      });
   }, []);
 
   const currentDayPlan = ITINERARY_DATA.find(d => d.day === activeDay) || ITINERARY_DATA[0];
