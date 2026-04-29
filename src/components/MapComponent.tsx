@@ -4,10 +4,14 @@ import { TransformWrapper, TransformComponent, ReactZoomPanPinchRef } from "reac
 import { Location } from '../data/itinerary';
 import { cn } from '../lib/utils';
 
+interface MapLocation extends Location {
+  day?: number;
+}
+
 interface MapComponentProps {
-  locations: Location[];
-  selectedLocation: Location | null;
-  onSelectLocation?: (location: Location) => void;
+  locations: MapLocation[];
+  selectedLocation: MapLocation | null;
+  onSelectLocation?: (location: MapLocation) => void;
 }
 
 export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedLocation, onSelectLocation }) => {
@@ -148,15 +152,30 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
               {markers.filter(loc => selectedLocation?.id !== loc.id).map((loc) => {
                 const pos = project(loc.coordinates.lat, loc.coordinates.lng);
                 return (
-                  <circle
-                    key={loc.id}
-                    cx={pos.x}
-                    cy={pos.y}
-                    r={1}
-                    fill="#8C8C8C"
-                    className="cursor-pointer hover:fill-[#1A1A1A] transition-colors duration-300"
+                  <g 
+                    key={loc.id} 
+                    className="cursor-pointer group/marker"
                     onClick={() => onSelectLocation?.(loc)}
-                  />
+                  >
+                    <circle
+                      cx={pos.x}
+                      cy={pos.y}
+                      r={1.8}
+                      fill="#8C8C8C"
+                      className="group-hover/marker:fill-ink transition-colors duration-300"
+                    />
+                    {loc.day && (
+                      <text
+                        x={pos.x}
+                        y={pos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        className="text-[1.2px] fill-white font-bold pointer-events-none"
+                      >
+                        {loc.day}
+                      </text>
+                    )}
+                  </g>
                 );
               })}
 
@@ -180,13 +199,25 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                     />
 
                     {/* Active Marker Dot */}
-                    <motion.circle
-                      cx={pos.x}
-                      cy={pos.y}
-                      r={1.5}
-                      fill="#1A1A1A"
-                      animate={{ scale: 1.2 }}
-                    />
+                    <motion.g animate={{ scale: 1.2 }}>
+                      <circle
+                        cx={pos.x}
+                        cy={pos.y}
+                        r={2}
+                        fill="#1A1A1A"
+                      />
+                      {loc.day && (
+                        <text
+                          x={pos.x}
+                          y={pos.y}
+                          textAnchor="middle"
+                          dominantBaseline="central"
+                          className="text-[1.5px] fill-white font-bold pointer-events-none"
+                        >
+                          {loc.day}
+                        </text>
+                      )}
+                    </motion.g>
 
                     {/* Active Labels */}
                     <motion.g

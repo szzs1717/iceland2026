@@ -125,7 +125,7 @@ export default function App() {
           </AnimatePresence>
         );
       case 'map':
-        const allLocations = ITINERARY_DATA.flatMap(d => d.locations);
+        const allLocations = ITINERARY_DATA.flatMap(d => d.locations.map(l => ({ ...l, day: d.day })));
         const filteredLocations = allLocations.filter(l => {
           const matchesFilter = filter === 'all' || l.type === filter;
           const matchesSearch = 
@@ -142,15 +142,14 @@ export default function App() {
 
         const scrollToDay = (day: number) => {
           const element = document.getElementById(`day-section-${day}`);
-          if (element) {
-            const offset = 100; // Offset for sticky header
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = element.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
-            const offsetPosition = elementPosition - offset;
-
-            window.scrollTo({
-              top: offsetPosition,
+          const container = document.getElementById('main-scroll-container');
+          if (element && container) {
+            const elementRect = element.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const relativeTop = elementRect.top - containerRect.top;
+            
+            container.scrollTo({
+              top: container.scrollTop + relativeTop - 20, // 20px padding
               behavior: 'smooth'
             });
           }
@@ -500,14 +499,12 @@ export default function App() {
             <p className="text-xs tracking-[0.2em] text-accent uppercase font-medium">Odyssey 2026</p>
           </div>
           <div className="flex items-center gap-4">
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <Share2 className="w-5 h-5 text-ink" />
-            </button>
+            {/* Share button removed as requested */}
           </div>
         </header>
 
         {/* Scrollable Container */}
-        <div className="flex-1 overflow-y-auto no-scrollbar scroll-smooth">
+        <div id="main-scroll-container" className="flex-1 overflow-y-auto no-scrollbar scroll-smooth">
           {/* Day Selector (Horizontal Scroll) - Only show in itinerary tab */}
           {activeTab === 'itinerary' && (
             <div className="px-6 py-8 overflow-x-auto flex gap-4 no-scrollbar bg-paper sticky top-0 z-40 border-b border-gray-50/50">
