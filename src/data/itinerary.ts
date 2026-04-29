@@ -1,4 +1,3 @@
-import { GoogleGenAI } from "@google/genai";
 
 export interface Location {
   id: string;
