@@ -33,7 +33,7 @@ export const WeatherWidget: React.FC<WeatherProps> = ({ location }) => {
   if (!weather) return <div className="h-8 w-24 animate-pulse bg-gray-200 rounded-full" />;
 
   return (
-    <div className="flex items-center gap-2 text-xs font-medium text-accent">
+    <div className="flex items-center gap-2 text-sm font-medium text-accent">
       <Cloud className="w-4 h-4" />
       <span>{weather.temp}°C</span>
       <span className="opacity-50">|</span>
