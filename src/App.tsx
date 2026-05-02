@@ -9,7 +9,7 @@ import { cn } from './lib/utils';
 import { Location } from './data/itinerary';
 
 export default function App() {
-  const [activeDay, setActiveDay] = useState(1);
+  const [activeDay, setActiveDay] = useState(0);
   const [activeTab, setActiveTab] = useState<'itinerary' | 'map' | 'calendar' | 'info'>('itinerary');
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [filter, setFilter] = useState<'all' | 'sight' | 'restaurant' | 'hotel'>('all');
@@ -42,6 +42,7 @@ export default function App() {
   }, []);
 
   const currentDayPlan = ITINERARY_DATA.find(d => d.day === activeDay) || ITINERARY_DATA[0];
+  const nextDayPlan = ITINERARY_DATA.find(d => d.day === activeDay + 1);
 
   const handleResetMap = () => {
     setSelectedLocation(null);
@@ -106,17 +107,17 @@ export default function App() {
               </div>
 
               {/* Next Day Preview */}
-              {activeDay < ITINERARY_DATA.length && (
+              {nextDayPlan && (
                 <button 
                   onClick={() => {
-                    setActiveDay(activeDay + 1);
+                    setActiveDay(nextDayPlan.day);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   className="mt-12 w-full p-6 rounded-2xl border border-gray-200 flex items-center justify-between group hover:border-ink transition-all"
                 >
                   <div className="text-left">
                     <span className="text-xs font-bold uppercase tracking-widest text-accent">Next Day</span>
-                    <h4 className="text-xl font-bold serif">{ITINERARY_DATA.find(d => d.day === activeDay + 1)?.title}</h4>
+                    <h4 className="text-xl font-bold serif">{nextDayPlan.title}</h4>
                   </div>
                   <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                 </button>
