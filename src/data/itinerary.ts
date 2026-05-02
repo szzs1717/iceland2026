@@ -248,6 +248,15 @@ export const ITINERARY_DATA: DayPlan[] = [
     locationName: 'Selfoss',
     locations: [
       {
+        id: 'breakfast-d3',
+        time: '08:00',
+        name: '飯店早餐 (已包)',
+        nameEn: 'Hotel Breakfast (Included)',
+        description: '在 Hótel Gullfoss 享用豐盛的早餐，準備前往金圈與斯奈山半島。',
+        type: 'restaurant',
+        coordinates: { lat: 64.325, lng: -20.129 }
+      },
+      {
         id: 'kerid-crater',
         time: '09:00 - 09:45',
         name: '凱瑞斯火山口',
@@ -577,7 +586,6 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 65.62, lng: -16.88 },
         imageUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop',
-        story: '《冰與火之歌》中瓊恩雪諾與耶哥蕊特的定情地。',
         driveInfo: { time: '10 min', distance: '5 km' }
       },
       {
@@ -617,41 +625,28 @@ export const ITINERARY_DATA: DayPlan[] = [
   {
     day: 6,
     date: '2026-05-28',
-    title: '震撼瀑布與小龍蝦之鄉',
+    title: '震撼瀑布與北方之都',
     locationName: 'Hofn',
     locations: [
       {
         id: 'breakfast-d6',
         time: '08:30',
-        name: '公寓自理早餐 (自炊)',
+        name: '自理早餐 (自炊)',
         nameEn: 'Self-catering Breakfast',
-        description: '在離開北方的阿庫雷里前，利用公寓廚房煮頓簡單早餐。',
+        description: '在公寓悠閒地煮個早餐，開始環島後半程的壯麗旅程。',
         type: 'restaurant',
         selfCatering: true,
         coordinates: { lat: 65.68, lng: -18.09 }
       },
       {
-        id: 'hafragilsfoss',
-        time: '10:15',
-        name: '哈弗拉吉瀑布',
-        nameEn: 'Hafragilsfoss',
-        description: '黛提瀑布下游的壯觀瀑布。雖然名氣不如黛提，但它在深邃峽谷中的姿態更顯神祕與宏偉。',
-        type: 'sight',
-        coordinates: { lat: 65.83, lng: -16.40 },
-        imageUrl: 'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '15 min', distance: '5 km' }
-      },
-      {
         id: 'dettifoss',
-        time: '11:00',
+        time: '10:30',
         name: '黛提瀑布',
         nameEn: 'Dettifoss Waterfall',
-        description: '這是歐洲水量最大的瀑布。站在它旁邊，你會感覺到大地的震動。這就是大自然的力量，讓你覺得自己渺小得像隻螞蟻。',
+        description: '歐州水量最大的瀑布。站在它旁邊，你會感覺到大地的震動，那是來自大自然最原始的力量。',
         type: 'sight',
         coordinates: { lat: 65.81, lng: -16.38 },
-        imageUrl: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=800&auto=format&fit=crop',
-        story: '電影《普羅米修斯》開場的取景地。',
-        waterproofRequired: true,
+        imageUrl: 'https://images.unsplash.com/photo-1529963183134-61a90db47eaf?q=80&w=800&auto=format&fit=crop',
         precautions: ['瀑布水量巨大，靠近時會有強烈的水氣與風壓', '相機與手機建議做好防水措施'],
         driveInfo: { time: '1.5 hr', distance: '100 km' }
       },
@@ -667,11 +662,11 @@ export const ITINERARY_DATA: DayPlan[] = [
         mustEat: ['自備餐點 (Packed Lunch)']
       },
       {
-        id: 'studlafoss',
+        id: 'studlagil',
         time: '15:00',
-        name: '玄武岩瀑布',
+        name: '玄武岩峽谷',
         nameEn: 'Stuðlagil Canyon',
-        description: '隱藏在峽谷中的玄武岩柱瀑布。這些柱子長得太整齊了，讓人懷疑是不是外星人蓋的。',
+        description: '隱藏在峽谷中的玄武岩柱。這些柱子長得太整齊了，讓人懷疑是不是外星人蓋的。',
         type: 'sight',
         coordinates: { lat: 65.16, lng: -15.31 },
         imageUrl: 'https://images.unsplash.com/photo-1552525860-47029679639e?q=80&w=800&auto=format&fit=crop',
@@ -708,6 +703,15 @@ export const ITINERARY_DATA: DayPlan[] = [
     title: '冰河湖與羽毛峽谷',
     locationName: 'Vik',
     locations: [
+      {
+        id: 'breakfast-d7',
+        time: '08:00',
+        name: '飯店早餐 (已包)',
+        nameEn: 'Hotel Breakfast (Included)',
+        description: '在 Milk Factory 享用簡潔而精緻的早餐，開啟冰河湖的一天。',
+        type: 'restaurant',
+        coordinates: { lat: 64.25, lng: -15.21 }
+      },
       {
         id: 'jokulsarlon-boat',
         time: '09:30',
@@ -937,28 +941,6 @@ export const ITINERARY_DATA: DayPlan[] = [
     locationName: 'Reykjavik',
     locations: [
       {
-        id: 'sun-voyager',
-        time: '08:00',
-        name: '維京魚骨船 (太陽之舟)',
-        nameEn: 'Sun Voyager (Sólfar)',
-        description: '這座雕塑象徵著對未知領土的探索，像是一艘將啟程的維京船。站在這裡看著海，想像自己是維京海盜，準備去征服世界（或者只是去買個熱狗）。',
-        type: 'sight',
-        coordinates: { lat: 64.147, lng: -21.922 },
-        imageUrl: 'https://images.unsplash.com/photo-1552525860-47029679639e?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '5 min', distance: '1 km' }
-      },
-      {
-        id: 'harpa',
-        time: '08:30',
-        name: 'Harpa 音樂廳',
-        nameEn: 'Harpa Concert Hall',
-        description: '雷克雅維克的地標建築，玻璃外牆鑲嵌著各種形狀的彩色玻璃，靈感來自冰島的玄武岩柱。無論從內部還是外部看，光影變化都非常迷人。',
-        type: 'sight',
-        coordinates: { lat: 64.150, lng: -21.932 },
-        imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '5 min', distance: '0.5 km' }
-      },
-      {
         id: 'pylsur',
         time: '09:00',
         name: 'Bæjarins Beztu Pylsur 早餐',
@@ -971,11 +953,33 @@ export const ITINERARY_DATA: DayPlan[] = [
         driveInfo: { time: '5 min', distance: '0.5 km' }
       },
       {
-        id: 'shopping-walk',
+        id: 'sun-voyager',
         time: '10:00',
+        name: '維京魚骨船 (太陽之舟)',
+        nameEn: 'Sun Voyager (Sólfar)',
+        description: '這座雕塑象徵著對未知領土的探索，像是一艘將啟程的維京船。站在這裡看著海，想像自己是維京海盜，準備去征服世界（或者只是去買個熱狗）。',
+        type: 'sight',
+        coordinates: { lat: 64.147, lng: -21.922 },
+        imageUrl: 'https://images.unsplash.com/photo-1552525860-47029679639e?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '1 km' }
+      },
+      {
+        id: 'harpa',
+        time: '10:30',
+        name: 'Harpa 音樂廳',
+        nameEn: 'Harpa Concert Hall',
+        description: '雷克雅維克的地標建築，玻璃外牆鑲嵌著各種形狀的彩色玻璃，靈感來自冰島的玄武岩柱。無論從內部還是外部看，光影變化都非常迷人。',
+        type: 'sight',
+        coordinates: { lat: 64.150, lng: -21.932 },
+        imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '0.5 km' }
+      },
+      {
+        id: 'shopping-walk',
+        time: '11:00',
         name: 'Laugavegur 購物與市區漫步',
         nameEn: 'Laugavegur Shopping & City Walk',
-        description: '雷克雅維克的主街。這裡有許多冰島設計師品牌、紀念品店和特色咖啡廳。去 Kolaportið 週末市集逛逛（如果是週末的話），或者到 Tjörnin 托寧湖畔餵鳥。',
+        description: '雷克雅維克的主街。這裡有許多冰島設計師品牌、紀念品店 and 特色咖啡廳。去 Kolaportið 週末市集逛逛（如果是週末的話），或者到 Tjörnin 托寧湖畔餵鳥。',
         type: 'sight',
         coordinates: { lat: 64.145, lng: -21.929 },
         imageUrl: 'https://images.unsplash.com/photo-1531737212413-967f9a70b5fd?q=80&w=800&auto=format&fit=crop',
