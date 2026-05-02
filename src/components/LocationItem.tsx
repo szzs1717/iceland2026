@@ -54,16 +54,28 @@ export const LocationItem: React.FC<LocationItemProps> = ({ location }) => {
 
         {/* Tags & Insights */}
         <div className="flex flex-wrap gap-2 mt-1">
-          {location.stayDuration && (
+          {location.stayDuration && location.type === 'hotel' && (
             <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded text-xs font-bold">
               <Hotel className="w-3.5 h-3.5" />
               住宿: {location.stayDuration} 晚
+            </div>
+          )}
+          {location.stayDuration && location.type !== 'hotel' && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-gray-50 text-gray-700 border border-gray-100 rounded text-xs font-bold">
+              <Info className="w-3.5 h-3.5" />
+              預計停留: {location.stayDuration} 分鐘
             </div>
           )}
           {location.breakfastIncluded && (
             <div className="flex items-center gap-1 px-2 py-0.5 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded text-xs font-bold">
               <Utensils className="w-3.5 h-3.5" />
               包早餐
+            </div>
+          )}
+          {location.selfCatering && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-purple-50 text-purple-700 border border-purple-100 rounded text-xs font-bold animate-pulse">
+              <UtensilsCrossed className="w-3.5 h-3.5" />
+              需自理 (自炊)
             </div>
           )}
           {location.waterproofRequired && (

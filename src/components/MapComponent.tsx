@@ -63,13 +63,17 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
   useEffect(() => {
     if (selectedLocation && transformComponentRef.current) {
       const { zoomToElement } = transformComponentRef.current;
-      zoomToElement(`marker-${selectedLocation.id}`, 2.5, 800);
+      // Small timeout ensures the element exists in DOM and Map has calculated its position
+      const timeoutId = setTimeout(() => {
+        zoomToElement(`marker-${selectedLocation.id}`, 3.5, 1000);
+      }, 100);
+      return () => clearTimeout(timeoutId);
     }
   }, [selectedLocation]);
 
   return (
     <div className="flex flex-col gap-4 mb-8">
-      <div className="relative w-full aspect-[4/3] bg-[#F2EFE9] rounded-3xl overflow-hidden border border-[#D9D4C7] shadow-inner group">
+      <div className="relative w-full aspect-[4/3] bg-[#F2EFE9] rounded-3xl overflow-hidden border border-[#D9D4C7] shadow-xl group">
         {/* Paper Texture Overlay */}
         <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
         
@@ -81,7 +85,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
           ref={transformComponentRef}
           initialScale={1}
           minScale={0.8}
-          maxScale={8}
+          maxScale={12}
           centerOnInit={true}
           doubleClick={{ disabled: false }}
           panning={{ velocityDisabled: true }}
@@ -96,6 +100,17 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                 <clipPath id="iceland-clip">
                   <path d={icelandPath} />
                 </clipPath>
+                {/* Text Halo Filter for better readability */}
+                <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+                  <feMorphology in="SourceAlpha" result="dilated" operator="dilate" radius="0.3" />
+                  <feFlood floodColor="white" floodOpacity="0.8" result="flood" />
+                  <feComposite in="flood" in2="dilated" operator="in" result="outline" />
+                  <feGaussianBlur in="outline" stdDeviation="0.1" result="blurred" />
+                  <feMerge>
+                    <feMergeNode in="blurred" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
 
               {/* Iceland Outline Background */}
@@ -112,7 +127,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
               />
 
               {/* Colored Regions (Clipped to Iceland) */}
-              <g clipPath="url(#iceland-clip)" opacity="0.6">
+              <g clipPath="url(#iceland-clip)" opacity={selectedLocation ? 0.3 : 0.6} className="transition-opacity duration-500">
                 {regionColors.map(r => (
                   <circle key={r.id} cx={r.cx} cy={r.cy} r={r.r} fill={r.color} />
                 ))}
@@ -137,6 +152,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                     x={pos.x}
                     y={pos.y}
                     textAnchor="middle"
+                    filter="url(#halo)"
                     className="font-bold uppercase fill-[#666] serif opacity-40 pointer-events-none"
                     style={{ 
                       letterSpacing: '0.15em',
@@ -156,11 +172,12 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                     key={loc.id} 
                     className="cursor-pointer group/marker"
                     onClick={() => onSelectLocation?.(loc)}
+                    opacity={selectedLocation ? 0.4 : 1}
                   >
                     <circle
                       cx={pos.x}
                       cy={pos.y}
-                      r={1.8}
+                      r={Math.max(0.8, 1.8 / Math.sqrt(scale))}
                       fill="#8C8C8C"
                       className="group-hover/marker:fill-ink transition-colors duration-300"
                     />
@@ -170,7 +187,8 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                         y={pos.y}
                         textAnchor="middle"
                         dominantBaseline="central"
-                        className="text-[1.2px] fill-white font-bold pointer-events-none"
+                        className="fill-white font-bold pointer-events-none"
+                        style={{ fontSize: `${Math.max(0.6, 1.2 / Math.sqrt(scale))}px` }}
                       >
                         {loc.day}
                       </text>
@@ -185,17 +203,17 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                 const pos = project(loc.coordinates.lat, loc.coordinates.lng);
                 return (
                   <g key={loc.id} id={`marker-${loc.id}`}>
-                    {/* Connection Line */}
+                    {/* Ripple animation */}
                     <motion.circle
                       cx={pos.x}
                       cy={pos.y}
-                      r="4"
+                      r={Math.max(2, 6 / Math.sqrt(scale))}
                       fill="none"
                       stroke="#1A1A1A"
-                      strokeWidth="0.2"
-                      strokeDasharray="1 1"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 0.3 }}
+                      strokeWidth={0.1 / Math.sqrt(scale)}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1.5, opacity: [0, 0.5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
                     />
 
                     {/* Active Marker Dot */}
@@ -203,7 +221,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                       <circle
                         cx={pos.x}
                         cy={pos.y}
-                        r={2}
+                        r={Math.max(1, 2.2 / Math.sqrt(scale))}
                         fill="#1A1A1A"
                       />
                       {loc.day && (
@@ -212,33 +230,35 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                           y={pos.y}
                           textAnchor="middle"
                           dominantBaseline="central"
-                          className="text-[1.5px] fill-white font-bold pointer-events-none"
+                          className="fill-white font-bold pointer-events-none"
+                          style={{ fontSize: `${Math.max(0.7, 1.4 / Math.sqrt(scale))}px` }}
                         >
                           {loc.day}
                         </text>
                       )}
                     </motion.g>
 
-                    {/* Active Labels */}
+                    {/* Active Labels with Halo */}
                     <motion.g
-                      initial={{ opacity: 0, y: 2 }}
+                      initial={{ opacity: 0, y: 1 }}
                       animate={{ opacity: 1, y: 0 }}
+                      filter="url(#halo)"
                     >
                       <text
                         x={pos.x}
-                        y={pos.y - 6}
+                        y={pos.y - (8 / Math.sqrt(scale))}
                         textAnchor="middle"
-                        className="text-[8px] font-black serif fill-ink"
-                        style={{ filter: 'drop-shadow(0px 1px 1px rgba(255,255,255,0.9))' }}
+                        className="font-black serif fill-black"
+                        style={{ fontSize: `${Math.max(3.5, 9 / Math.sqrt(scale))}px` }}
                       >
                         {loc.name}
                       </text>
                       <text
                         x={pos.x}
-                        y={pos.y - 3}
+                        y={pos.y - (4.5 / Math.sqrt(scale))}
                         textAnchor="middle"
-                        className="text-[4px] font-bold uppercase tracking-widest fill-gray-500 serif"
-                        style={{ filter: 'drop-shadow(0px 1px 1px rgba(255,255,255,0.9))' }}
+                        className="font-bold uppercase tracking-widest fill-gray-500 serif"
+                        style={{ fontSize: `${Math.max(1.8, 4.5 / Math.sqrt(scale))}px` }}
                       >
                         {loc.nameEn}
                       </text>

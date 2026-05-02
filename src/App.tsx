@@ -41,6 +41,13 @@ export default function App() {
       });
   }, []);
 
+  const scrollToTop = () => {
+    const container = document.getElementById('main-scroll-container');
+    if (container) {
+      container.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const currentDayPlan = ITINERARY_DATA.find(d => d.day === activeDay) || ITINERARY_DATA[0];
   const nextDayPlan = ITINERARY_DATA.find(d => d.day === activeDay + 1);
 
@@ -111,7 +118,7 @@ export default function App() {
                 <button 
                   onClick={() => {
                     setActiveDay(nextDayPlan.day);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    scrollToTop();
                   }}
                   className="mt-12 w-full p-6 rounded-2xl border border-gray-200 flex items-center justify-between group hover:border-ink transition-all"
                 >
@@ -138,7 +145,10 @@ export default function App() {
 
         const handleLocationSelect = (loc: Location) => {
           setSelectedLocation(loc);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          const container = document.getElementById('main-scroll-container');
+          if (container) {
+            container.scrollTo({ top: 0, behavior: 'smooth' });
+          }
         };
 
         const scrollToDay = (day: number) => {
@@ -341,6 +351,7 @@ export default function App() {
                   onClick={() => {
                     setActiveDay(day.day);
                     setActiveTab('itinerary');
+                    setTimeout(scrollToTop, 100);
                   }}
                   className="w-full p-4 rounded-xl border border-gray-100 flex items-center gap-4 text-left hover:bg-gray-50 transition-colors"
                 >
@@ -512,7 +523,10 @@ export default function App() {
               {ITINERARY_DATA.map((day) => (
                 <button
                   key={day.day}
-                  onClick={() => setActiveDay(day.day)}
+                  onClick={() => {
+                    setActiveDay(day.day);
+                    scrollToTop();
+                  }}
                   className={cn(
                     "flex flex-col items-center min-w-[64px] transition-all duration-300",
                     activeDay === day.day ? "scale-110" : "opacity-40"

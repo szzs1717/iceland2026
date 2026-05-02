@@ -17,6 +17,7 @@ export interface Location {
   precautions?: string[];
   bookingNotes?: string[];
   waterproofRequired?: boolean;
+  selfCatering?: boolean;
   driveInfo?: { time: string; distance: string };
 }
 
@@ -64,16 +65,6 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'transport',
         coordinates: { lat: 63.985, lng: -22.6056 },
         imageUrl: 'https://images.unsplash.com/photo-1506012733827-e916555623f2?q=80&w=800&auto=format&fit=crop'
-      },
-      {
-        id: 'hotel-laugavegur-d0',
-        time: '20:00',
-        name: '入住 Center Hotels Laugavegur',
-        nameEn: 'Stay at Center Hotels Laugavegur',
-        description: '抵達冰島的第一晚，在雷克雅維克最熱鬧的街道上休息，為明天的冒險做準備。',
-        type: 'hotel',
-        coordinates: { lat: 64.144, lng: -21.914 },
-        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop'
       }
     ]
   },
@@ -98,7 +89,7 @@ export const ITINERARY_DATA: DayPlan[] = [
       },
       {
         id: 'costco',
-        time: '11:40',
+        time: '11:00',
         name: 'Costco 戰略補給',
         nameEn: 'Costco Strategic Supply',
         description: '在冰島，Costco 是我們最好的朋友。這裡的熱狗是全島最便宜的救贖，記得多買幾箱水和零食，因為接下來的路段可能幾小時都見不到人煙。',
@@ -110,7 +101,7 @@ export const ITINERARY_DATA: DayPlan[] = [
       },
       {
         id: 'hallgrimskirkja',
-        time: '13:00',
+        time: '12:40',
         name: '哈爾格林姆教堂',
         nameEn: 'Hallgrímskirkja',
         description: '這座教堂長得像太空梭，也像玄武岩。它是雷克雅維克的守護神，站在前面拍照，保證你的 IG 讚數會像噴泉一樣爆發。',
@@ -118,7 +109,39 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 64.1417, lng: -21.9266 },
         imageUrl: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=800&auto=format&fit=crop',
         story: '設計靈感來自冰島隨處可見的玄武岩柱，花了 41 年才蓋好，冰島人做事就是這麼有耐心。',
-        driveInfo: { time: '15 min', distance: '5 km' }
+        driveInfo: { time: '5 min', distance: '1 km' }
+      },
+      {
+        id: 'rainbow-street',
+        time: '14:00',
+        name: '彩虹街與雷克雅維克漫步',
+        nameEn: 'Rainbow Street & Reykjavik City Walk',
+        description: '雷克雅維克最有名的網紅大街！彩虹的盡頭就是教堂。在這裡隨意逛逛小店，感受冰島首都的文青氣息。',
+        type: 'sight',
+        coordinates: { lat: 64.145, lng: -21.929 },
+        imageUrl: 'https://images.unsplash.com/photo-1531737212413-967f9a70b5fd?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '1 km' }
+      },
+      {
+        id: 'hotel-laugavegur',
+        time: '15:15',
+        name: '入住 Center Hotels Laugavegur',
+        nameEn: 'Check-in Center Hotels Laugavegur',
+        description: '今晚就在這條最熱鬧的街上休息。飯店很現代，放好行李後我們可以繼續在市區探索。',
+        type: 'hotel',
+        coordinates: { lat: 64.144, lng: -21.914 },
+        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'laugavegur-shopping',
+        time: '15:45',
+        name: 'Laugavegur 購物街漫步',
+        nameEn: 'Laugavegur Shopping Street Walk',
+        description: '雷克雅維克最熱鬧的購物大街！這裡聚集了各式冰島設計品牌、戶外用品店 (如 66° North) 以及特色咖啡廳，是補足裝備與挑選紀念品的好地方。',
+        type: 'sight',
+        coordinates: { lat: 64.145, lng: -21.920 },
+        imageUrl: 'https://images.unsplash.com/photo-1551009175-8a68da93d5f9?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '1 km' }
       },
       {
         id: 'messinn',
@@ -150,16 +173,6 @@ export const ITINERARY_DATA: DayPlan[] = [
         bookingNotes: ['攜帶泳衣及防水手機袋 (Swimwear & waterproof cellphone case)'],
         precautions: ['泡溫泉前請先徹底淋浴', '長頭髮建議塗抹護髮乳或紮起，避免矽粉造成頭髮乾澀'],
         driveInfo: { time: '20 min', distance: '10 km' }
-      },
-      {
-        id: 'hotel-laugavegur',
-        time: '21:00',
-        name: '入住 Center Hotels Laugavegur',
-        nameEn: 'Stay at Center Hotels Laugavegur',
-        description: '今晚就在這條最熱鬧的街上休息。飯店很現代，但別逛街逛到忘記睡覺，明天我們要開始真正的環島長征了！',
-        type: 'hotel',
-        coordinates: { lat: 64.144, lng: -21.914 },
-        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop'
       }
     ]
   },
@@ -200,54 +213,20 @@ export const ITINERARY_DATA: DayPlan[] = [
         nameEn: 'Gullfoss Panorama Restaurant Lunch',
         description: '就在瀑布旁的休息站，提供溫暖的湯品與漢堡，為接下來的冰川冒險蓄勢。',
         type: 'restaurant',
-        coordinates: { lat: 64.325, lng: -20.129 },
-        imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop',
-        mustEat: ['肉湯 (Meat Soup)', '沙拉與輕食'],
-        driveInfo: { time: '10 min', distance: '1 km' }
+        coordinates: { lat: 64.325, lng: -20.129 }
       },
       {
-        id: 'monster-truck',
-        time: '12:30',
+        id: 'monster-truck-tour',
+        time: '13:30',
         name: '冰川巨獸卡車之旅',
-        nameEn: 'Red Glacier Monster Truck Tour',
-        description: '搭乘世界最大的怪獸卡車，直上朗格冰川！這趟極限之旅會帶你親睹萬年冰川的震撼，絕對是你人生中最瘋狂的搭乘體驗。',
+        nameEn: 'Into the Glacier Monster Truck Tour',
+        description: '搭乘改裝的巨龍卡車登上朗格冰原 (Langjökull)，進入人造冰宮探索萬年冰川深處的神祕藍光。這是冰島最震撼的極地體驗之一。',
         type: 'sight',
-        coordinates: { lat: 64.5, lng: -20.2 },
-        imageUrl: 'https://images.unsplash.com/photo-1530652101053-8c0db4fbb5de?q=80&w=800&auto=format&fit=crop',
-        tips: [
-          '集合地點: Gullfoss Cafe 停車場 (Sleipnir Tours)',
-          '預定時間: 12:30'
-        ],
-        bookingNotes: [
-          '穿著防風防水外套', 
-          '穿著保暖長褲與厚襪', 
-          '攜帶太陽眼鏡 (雪地反光強烈)'
-        ],
-        waterproofRequired: true,
-        stayDuration: 240,
-        driveInfo: { time: '5 min', distance: '3.2 km' }
-      },
-      {
-        id: 'gullfoss-waterfall',
-        time: '16:30',
-        name: '黃金瀑布',
-        nameEn: 'Gullfoss Waterfall',
-        description: '冰島最壯觀的兩層瀑布。巨大的水流注入深谷，激起漫天水霧。運氣好時，彩虹會直接架在瀑布之上。',
-        type: 'sight',
-        coordinates: { lat: 64.327, lng: -20.120 },
-        imageUrl: 'https://images.unsplash.com/photo-1529963183134-61a90db47eaf?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '5 min', distance: '3 km' }
-      },
-      {
-        id: 'hotel-gullfoss-stay',
-        time: '17:40',
-        name: '入住 Hótel Gullfoss',
-        nameEn: 'Check-in Hótel Gullfoss',
-        description: '離瀑布僅幾分鐘車程的溫馨旅店。在結束一天的冒險後，這裡提供安靜、舒適的休息環境。',
-        type: 'hotel',
-        coordinates: { lat: 64.325, lng: -20.129 },
-        imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '8 min', distance: '7.8 km' }
+        coordinates: { lat: 64.60, lng: -20.60 },
+        imageUrl: 'https://images.unsplash.com/photo-1473081556163-2a17de81fc91?q=80&w=800&auto=format&fit=crop',
+        tips: ['請務必提前 20 分鐘報到', '冰川內部終年零度，請做好防護'],
+        bookingNotes: ['位置有限，建議提前預訂', '需穿著結實的防水登山鞋'],
+        driveInfo: { time: '60 min', distance: '40 km' }
       },
       {
         id: 'hotel-gullfoss-dinner',
@@ -257,67 +236,55 @@ export const ITINERARY_DATA: DayPlan[] = [
         description: '享用精緻的傳統冰島晚餐。在地食材與大廚的巧手，為寒冷的冰島夜晚注入一股暖流。',
         type: 'restaurant',
         coordinates: { lat: 64.325, lng: -20.129 },
-        imageUrl: 'https://images.unsplash.com/photo-1551739440-5dd934d3a94a?q=80&w=800&auto=format&fit=crop',
-        mustEat: ['冰島羊排', '在地鮮魚']
-      },
-      {
-        id: 'geysir-night',
-        time: '20:15',
-        name: '蓋錫爾間歇泉 (夜訪)',
-        nameEn: 'Geysir Geothermal Area (Night Visit)',
-        description: '夜晚的間歇泉少了一份喧囂，多了一份神祕。看著 Strokkur 在星空下噴發出一股巨大的熱氣，那種震撼更勝白天。',
-        type: 'sight',
-        coordinates: { lat: 64.310, lng: -20.302 },
-        imageUrl: 'https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?q=80&w=800&auto=format&fit=crop',
-        tips: ['夜間注意防燙與防風', '地熱區步道濕滑請小心'],
-        driveInfo: { time: '8 min', distance: '7.8 km' }
+        imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '1 km' }
       }
     ]
   },
   {
     day: 3,
     date: '2026-05-25',
-    title: '斯奈山半島：冰島縮影',
-    locationName: 'Olafsvik',
+    title: '火山口湖與斯奈山半島',
+    locationName: 'Selfoss',
     locations: [
       {
-        id: 'gullfoss-breakfast',
-        time: '07:00',
-        name: 'Hótel Gullfoss 早餐',
-        nameEn: 'Hótel Gullfoss Breakfast',
-        description: '吃一頓豐盛的自助早餐，為今天前往斯奈山半島的長途跋涉做好心理與物理的準備。',
-        type: 'restaurant',
-        coordinates: { lat: 64.325, lng: -20.129 },
-        imageUrl: 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=800&auto=format&fit=crop',
-        breakfastIncluded: true,
-        driveInfo: { time: '44 min', distance: '54.1 km' }
+        id: 'kerid-crater',
+        time: '09:00 - 09:45',
+        name: '凱瑞斯火山口',
+        nameEn: 'Kerið Volcanic Crater',
+        description: '這座擁有三千年歷史的火山口，湖水呈現醉人的深藍色，周圍則是鮮紅的岩壁，色彩對比極其震撼。它是金圈附近最迷人的火山口湖。',
+        type: 'sight',
+        coordinates: { lat: 64.041, lng: -20.885 },
+        imageUrl: 'https://images.unsplash.com/photo-1547432431-153381648a73?q=80&w=800&auto=format&fit=crop',
+        stayDuration: 45,
+        tips: ['可以沿著火山口邊緣走一圈', '也可以走下樓梯到湖邊'],
+        driveInfo: { time: '15 min', distance: '15 km' }
       },
       {
-        id: 'dirty-burger-lunch',
-        time: '12:00',
-        name: 'Dirty Burger And Ribs 午餐',
-        nameEn: 'Dirty Burger And Ribs Lunch',
-        description: '位於 Selfoss 的人氣漢堡店。這裡的漢堡雖然「髒」，但絕對美味到讓你吮指回味，是公路旅行的最佳夥伴。',
+        id: 'dirty-burger-brunch',
+        time: '10:30',
+        name: 'Dirty Burger And Ribs 早午餐',
+        nameEn: 'Dirty Burger And Ribs Brunch',
+        description: '位於 Selfoss 的人氣漢堡店。建議在這裡先吃飽或外帶，因為接下來前往斯奈山半島的車程較長。',
         type: 'restaurant',
         coordinates: { lat: 63.936, lng: -20.992 },
         imageUrl: 'https://images.unsplash.com/photo-1529692236671-f1f6e9460272?q=80&w=800&auto=format&fit=crop',
-        mustEat: ['公路漢堡', '慢烤肋排'],
-        driveInfo: { time: '79 min', distance: '104 km' }
+        driveInfo: { time: '160 min', distance: '195 km' }
       },
       {
         id: 'budir-black-church',
-        time: '13:30',
+        time: '14:30',
         name: '布迪爾黑教堂',
         nameEn: 'Búðakirkja Black Church',
         description: '孤獨地矗立在荒原中的黑色小教堂。它是冰島最上鏡的景點之一，背後就是無盡的大海與雪山。',
         type: 'sight',
         coordinates: { lat: 64.821, lng: -23.384 },
         imageUrl: 'https://images.unsplash.com/photo-1518413900360-f305b78d1735?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '18 min', distance: '19.3 km' }
+        driveInfo: { time: '20 min', distance: '20 km' }
       },
       {
         id: 'arnarstapi-view',
-        time: '14:10',
+        time: '15:15',
         name: '阿爾納斯塔皮懸崖觀景',
         nameEn: 'Arnarstapi Cliff Viewpoint',
         description: '壯麗的海蝕洞與奇形怪狀的岩石。這裡有許多鬼斧神工的自然景觀，如石柱群與橫垮海上的天然拱橋。',
@@ -325,55 +292,55 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 64.766, lng: -23.621 },
         imageUrl: 'https://images.unsplash.com/photo-1601618600109-77573031267b?q=80&w=800&auto=format&fit=crop',
         tips: ['Gatklettur 石拱門', 'Arnarstapi 港口散步道'],
-        driveInfo: { time: '9 min', distance: '8.4 km' }
+        driveInfo: { time: '15 min', distance: '10 km' }
       },
       {
         id: 'londrangar-cliffs',
-        time: '15:25',
+        time: '16:15',
         name: '怪物海岸',
         nameEn: 'Londrangar Basalt Cliffs',
         description: '高耸的海中玄武岩柱，遠看像是被遺棄的城堡，當地傳說這是巨魔留下的遺跡。',
         type: 'sight',
         coordinates: { lat: 64.737, lng: -23.774 },
         imageUrl: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '13 min', distance: '17.1 km' }
+        driveInfo: { time: '15 min', distance: '20 km' }
       },
       {
         id: 'saxholl-crater',
-        time: '16:00',
+        time: '17:00',
         name: 'Saxholl 火山口',
         nameEn: 'Saxholl Crater',
         description: '一座造型完美的火山口。你可以順著階梯輕鬆登頂，俯視斯奈山半島的廣袤荒野與遠方的海洋。',
         type: 'sight',
         coordinates: { lat: 64.851, lng: -23.926 },
         imageUrl: 'https://images.unsplash.com/photo-1500043356145-5e14bc30f28e?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '19 min', distance: '20.7 km' }
+        driveInfo: { time: '20 min', distance: '20 km' }
       },
       {
         id: 'kassinn-shop',
-        time: '17:05',
+        time: '18:00',
         name: 'Kassinn 補給站',
         nameEn: 'Kassinn Shopping',
         description: '這是在斯奈山半島尖端難得的補給點，可以買些零食 or 必需品。',
         type: 'transport',
         coordinates: { lat: 64.894, lng: -23.708 },
         imageUrl: 'https://images.unsplash.com/photo-1604719312563-8912e9223c6a?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '7 min', distance: '6.6 km' }
+        driveInfo: { time: '10 min', distance: '5 km' }
       },
       {
         id: 'freezer-hostel-stay',
-        time: '17:40',
+        time: '18:40',
         name: '入住 The Freezer Hostel',
         nameEn: 'Check-in The Freezer Hostel',
         description: '這是一家充滿生命力的藝術青年旅館，經常有戲劇演出與 Live 表演，氛圍極其放鬆且富有創意。',
         type: 'hotel',
         coordinates: { lat: 64.91, lng: -23.81 },
         imageUrl: 'https://images.unsplash.com/photo-1555854816-802f188095e4?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '7 min', distance: '6.7 km' }
+        driveInfo: { time: '10 min', distance: '5 km' }
       },
       {
         id: 'matarlist-dinner',
-        time: '18:20',
+        time: '19:30',
         name: 'Matarlist 晚宴',
         nameEn: 'Matarlist Dinner',
         description: '位於附近小鎮的道地餐廳。這裡使用最新鮮的冰島食材，製作出的每一道料理都充滿了廚師的心意。',
@@ -381,21 +348,26 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 64.894, lng: -23.708 },
         imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop',
         mustEat: ['是日鮮魚 (Catch of the Day)', '羊肉湯'],
-        driveInfo: { time: '2 min', distance: '0.3 km' }
+        driveInfo: { time: '5 min', distance: '1 km' }
       },
       {
         id: 'kissing-bench',
-        time: '20:05',
+        time: '21:00',
         name: '親吻長椅',
         nameEn: 'Kissing Bench',
         description: '小鎮上一個浪漫的角落。在冰島的夏日長晝下，坐在長椅上靜靜欣賞小鎮海港的夜色。',
         type: 'sight',
         coordinates: { lat: 64.894, lng: -23.712 },
         imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '7 min', distance: '6.7 km' }
+        driveInfo: { time: '7 min', distance: '1 km' }
       }
     ]
   },
+
+
+
+
+
   {
     day: 4,
     date: '2026-05-26',
@@ -403,17 +375,60 @@ export const ITINERARY_DATA: DayPlan[] = [
     locationName: 'Akureyri',
     locations: [
       {
-        id: 'kirkjufell',
+        id: 'breakfast-d4',
+        time: '08:00',
+        name: '自理早餐 (自炊)',
+        nameEn: 'Self-catering Breakfast',
+        description: '在青年旅館煮份簡單的早餐，為今天的教堂山之行補給能量。',
+        type: 'restaurant',
+        selfCatering: true,
+        coordinates: { lat: 64.91, lng: -23.81 }
+      },
+      {
+        id: 'kirkjufellsfoss',
+        time: '08:30',
+        name: '教堂山瀑布',
+        nameEn: 'Kirkjufellsfossar',
+        description: '與教堂山對望的瀑布。這裡是攝影師的最愛，拍出的經典角度讓這座山看起來更加優雅。',
+        type: 'sight',
+        coordinates: { lat: 64.926, lng: -23.311 },
+        imageUrl: 'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '1 km' }
+      },
+      {
+        id: 'kirkjufell-view',
         time: '08:50',
-        name: '教堂山',
-        nameEn: 'Kirkjufell Mountain',
+        name: '教堂山觀景點',
+        nameEn: 'Kirkjufell Viewpoint',
         description: '這就是那座傳說中的「草帽山」。它是冰島被拍過最多次的山，如果你沒跟它合照，別說你來過冰島。',
         type: 'sight',
         coordinates: { lat: 64.941, lng: -23.306 },
         imageUrl: 'https://images.unsplash.com/photo-1476610182048-b716b8518aae?q=80&w=800&auto=format&fit=crop',
         story: '《冰與火之歌》中的箭頭山取景地。',
         precautions: ['請勿在非法區域放無人機 (Drone)', '步道可能濕滑，注意腳下安全'],
-        driveInfo: { time: '1.5 hr', distance: '100 km' }
+        driveInfo: { time: '10 min', distance: '12 km' }
+      },
+      {
+        id: 'kolgrafarfjordur',
+        time: '09:30',
+        name: '劍之橋觀景點',
+        nameEn: 'Kolgrafarfjordur Viewpoint',
+        description: '橫跨峽谷的大橋，風景優美。這裡經常可以看到成群的鳥類，甚至有機會看到鯨魚在峽灣中出沒。',
+        type: 'sight',
+        coordinates: { lat: 64.95, lng: -23.05 },
+        imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '30 min', distance: '35 km' }
+      },
+      {
+        id: 'sugandisey',
+        time: '10:30',
+        name: '蘇根迪塞島燈塔',
+        nameEn: 'Sugandisey Island Lighthouse',
+        description: '俯瞰斯蒂基斯霍爾米港口的小山丘。這座紅色的燈塔在蔚藍的峽灣中格外搶眼。',
+        type: 'sight',
+        coordinates: { lat: 65.078, lng: -22.727 },
+        imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '1 km' }
       },
       {
         id: 'hafnarvagninn',
@@ -425,7 +440,7 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 65.07, lng: -22.72 },
         imageUrl: 'https://images.unsplash.com/photo-1529692236671-f1f6e9460272?q=80&w=800&auto=format&fit=crop',
         mustEat: ['炸魚薯條 (Fish\'n Chips)'],
-        driveInfo: { time: '2 hr', distance: '160 km' }
+        driveInfo: { time: '90 min', distance: '120 km' }
       },
       {
         id: 'grabrok',
@@ -436,7 +451,7 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'sight',
         coordinates: { lat: 64.77, lng: -21.53 },
         imageUrl: 'https://images.unsplash.com/photo-1500043356145-5e14bc30f28e?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '3 hr', distance: '240 km' }
+        driveInfo: { time: '3.5 hr', distance: '300 km' }
       },
       {
         id: 'k16-apartments',
@@ -447,8 +462,7 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'hotel',
         coordinates: { lat: 65.68, lng: -18.09 },
         imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop',
-        stayDuration: 2,
-        breakfastIncluded: true
+        stayDuration: 2
       },
       {
         id: 'idunn-matholl',
@@ -457,20 +471,32 @@ export const ITINERARY_DATA: DayPlan[] = [
         nameEn: 'Iðunn Mathöll Dinner',
         description: '阿庫雷里的美食廣場。這裡有各種選擇，適合大家各取所需，不用再為了吃什麼而吵架了。',
         type: 'restaurant',
-        coordinates: { lat: 65.68, lng: -18.09 },
+        coordinates: { lat: 65.684, lng: -18.092 },
         imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop',
-        mustEat: ['各類美食 (Food Court)']
+        mustEat: ['各類美食 (Food Court)'],
+        driveInfo: { time: '5 min', distance: '1 km' }
       },
       {
-        id: 'brynja',
+        id: 'netto-shop',
+        time: '19:20',
+        name: 'Netto 超市補給',
+        nameEn: 'Netto Shopping',
+        description: '在北方之都的大型補給！買些水果、飲料，或者冰島特有的零食，為接下來的路程做準備。',
+        type: 'transport',
+        coordinates: { lat: 65.685, lng: -18.106 },
+        imageUrl: 'https://images.unsplash.com/photo-1604719312563-8912e9223c6a?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '1 km' }
+      },
+      {
+        id: 'akureyri-walk',
         time: '20:00',
-        name: 'Brynja 冰淇淋',
-        nameEn: 'Brynja Ice Cream',
-        description: '冰島最有名的冰淇淋店之一。就算外面在下雪，冰島人還是要吃冰淇淋，這就是態度！',
-        type: 'restaurant',
-        coordinates: { lat: 65.67, lng: -18.09 },
+        name: '阿庫雷里市區探索',
+        nameEn: 'Akureyri City Walk',
+        description: '漫步在這個充滿活力的小鎮。參觀阿庫雷里大教堂，或者去 Brynja 吃個冰淇淋，感受北國夏夜的寧靜。',
+        type: 'sight',
+        coordinates: { lat: 65.68, lng: -18.09 },
         imageUrl: 'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?q=80&w=800&auto=format&fit=crop',
-        mustEat: ['招牌冰淇淋 (ice-cream)']
+        mustEat: ['Brynja 冰淇淋 (ice-cream)']
       }
     ]
   },
@@ -480,6 +506,16 @@ export const ITINERARY_DATA: DayPlan[] = [
     title: '阿庫雷里與米湖奇觀',
     locationName: 'Myvatn',
     locations: [
+      {
+        id: 'breakfast-d5',
+        time: '08:00',
+        name: '公寓自理早餐 (自炊)',
+        nameEn: 'Self-catering Breakfast at Apartment',
+        description: '利用 C16 Apartments 的廚房設施，煮頓豐盛的早餐再出發賞鯨。',
+        type: 'restaurant',
+        selfCatering: true,
+        coordinates: { lat: 65.68, lng: -18.09 }
+      },
       {
         id: 'whale-watching',
         time: '09:00',
@@ -519,7 +555,18 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 65.68, lng: -17.55 },
         imageUrl: 'https://images.unsplash.com/photo-1547432431-153381648a73?q=80&w=800&auto=format&fit=crop',
         story: '西元1000年，冰島法律演講人將北歐神像丟入瀑布，象徵改信基督教。',
-        driveInfo: { time: '1 hr', distance: '80 km' }
+        driveInfo: { time: '40 min', distance: '50 km' }
+      },
+      {
+        id: 'myvatn-viewpoint',
+        time: '15:40',
+        name: '米湖觀景點',
+        nameEn: 'Lake Myvatn View Point',
+        description: '從高處俯瞰米湖的全景。這裡的地貌非常獨特，偽火山口、熔岩原與湛藍的湖水交織成一幅奇幻的畫卷。',
+        type: 'sight',
+        coordinates: { lat: 65.61, lng: -16.99 },
+        imageUrl: 'https://images.unsplash.com/photo-1520113412646-04fc68c0bc21?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '10 min', distance: '5 km' }
       },
       {
         id: 'grjotagja',
@@ -573,6 +620,27 @@ export const ITINERARY_DATA: DayPlan[] = [
     title: '震撼瀑布與小龍蝦之鄉',
     locationName: 'Hofn',
     locations: [
+      {
+        id: 'breakfast-d6',
+        time: '08:30',
+        name: '公寓自理早餐 (自炊)',
+        nameEn: 'Self-catering Breakfast',
+        description: '在離開北方的阿庫雷里前，利用公寓廚房煮頓簡單早餐。',
+        type: 'restaurant',
+        selfCatering: true,
+        coordinates: { lat: 65.68, lng: -18.09 }
+      },
+      {
+        id: 'hafragilsfoss',
+        time: '10:15',
+        name: '哈弗拉吉瀑布',
+        nameEn: 'Hafragilsfoss',
+        description: '黛提瀑布下游的壯觀瀑布。雖然名氣不如黛提，但它在深邃峽谷中的姿態更顯神祕與宏偉。',
+        type: 'sight',
+        coordinates: { lat: 65.83, lng: -16.40 },
+        imageUrl: 'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '15 min', distance: '5 km' }
+      },
       {
         id: 'dettifoss',
         time: '11:00',
@@ -737,6 +805,15 @@ export const ITINERARY_DATA: DayPlan[] = [
     locationName: 'Reykjavik',
     locations: [
       {
+        id: 'breakfast-d8',
+        time: '07:30',
+        name: '飯店早餐 (已包)',
+        nameEn: 'Hotel Breakfast (Included)',
+        description: '在 Hótel Búrfell 享用豐富的飯店早餐，為最後一段南岸旅程儲備體力。',
+        type: 'restaurant',
+        coordinates: { lat: 63.46, lng: -19.14 }
+      },
+      {
         id: 'reynisfjara-real',
         time: '08:15',
         name: '雷尼斯黑沙灘',
@@ -752,9 +829,9 @@ export const ITINERARY_DATA: DayPlan[] = [
       {
         id: 'plane-wreck',
         time: '09:40',
-        name: '飛機殘骸',
-        nameEn: 'Sólheimasandur Plane Wreck',
-        description: '這架 1973 年迫降的美國海軍飛機，現在是冰島最酷的拍照背景。雖然它看起來像科幻電影場景，但請別試圖爬上去，保護古蹟人人有責。',
+        name: 'DC-3 飛機殘骸',
+        nameEn: 'DC-3 Sólheimasandur Plane Wreck',
+        description: '這架 1973 年迫降的美國海軍 DC-3 飛機，現在是冰島最酷的拍照背景。雖然它看起來像科幻電影場景，但請別試圖爬上去，保護古蹟人人有責。',
         type: 'sight',
         coordinates: { lat: 63.45, lng: -19.36 },
         imageUrl: 'https://images.unsplash.com/photo-1498354136128-58f790194fa7?q=80&w=800&auto=format&fit=crop',
@@ -837,7 +914,19 @@ export const ITINERARY_DATA: DayPlan[] = [
         type: 'restaurant',
         coordinates: { lat: 64.14, lng: -21.93 },
         imageUrl: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=800&auto=format&fit=crop',
-        mustEat: ['尼泊爾咖哩 (Nepalese Cuisine)']
+        mustEat: ['尼泊爾咖哩 (Nepalese Cuisine)'],
+        driveInfo: { time: '5 min', distance: '1 km' }
+      },
+      {
+        id: 'reykjavik-walk-2',
+        time: '20:15',
+        name: '雷克雅維克晚間漫步',
+        nameEn: 'Reykjavik Night City Walk',
+        description: '再次回到首都的街道。今晚可以去 Isbudin litla Valdis 嚐嚐冰島人引以為傲的冰淇淋，感受北方之都的夜之魅力。',
+        type: 'sight',
+        coordinates: { lat: 64.145, lng: -21.93 },
+        imageUrl: 'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?q=80&w=800&auto=format&fit=crop',
+        mustEat: ['Valdís 冰淇淋 (Isbudin litla Valdis)']
       }
     ]
   },
@@ -850,13 +939,24 @@ export const ITINERARY_DATA: DayPlan[] = [
       {
         id: 'sun-voyager',
         time: '08:00',
-        name: '太陽之舟',
-        nameEn: 'Sun Voyager',
-        description: '這座雕塑象徵著對未知領土的探索。站在這裡看著海，想像自己是維京海盜，準備去征服世界（或者只是去買個熱狗）。',
+        name: '維京魚骨船 (太陽之舟)',
+        nameEn: 'Sun Voyager (Sólfar)',
+        description: '這座雕塑象徵著對未知領土的探索，像是一艘將啟程的維京船。站在這裡看著海，想像自己是維京海盜，準備去征服世界（或者只是去買個熱狗）。',
         type: 'sight',
         coordinates: { lat: 64.147, lng: -21.922 },
         imageUrl: 'https://images.unsplash.com/photo-1552525860-47029679639e?q=80&w=800&auto=format&fit=crop',
-        driveInfo: { time: '10 min', distance: '2 km' }
+        driveInfo: { time: '5 min', distance: '1 km' }
+      },
+      {
+        id: 'harpa',
+        time: '08:30',
+        name: 'Harpa 音樂廳',
+        nameEn: 'Harpa Concert Hall',
+        description: '雷克雅維克的地標建築，玻璃外牆鑲嵌著各種形狀的彩色玻璃，靈感來自冰島的玄武岩柱。無論從內部還是外部看，光影變化都非常迷人。',
+        type: 'sight',
+        coordinates: { lat: 64.150, lng: -21.932 },
+        imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
+        driveInfo: { time: '5 min', distance: '0.5 km' }
       },
       {
         id: 'pylsur',
@@ -868,7 +968,20 @@ export const ITINERARY_DATA: DayPlan[] = [
         coordinates: { lat: 64.148, lng: -21.937 },
         imageUrl: 'https://images.unsplash.com/photo-1541232399669-e3476639e77d?q=80&w=800&auto=format&fit=crop',
         mustEat: ['熱狗 (Hot Dog)'],
-        driveInfo: { time: '15 min', distance: '1 km' }
+        driveInfo: { time: '5 min', distance: '0.5 km' }
+      },
+      {
+        id: 'shopping-walk',
+        time: '10:00',
+        name: 'Laugavegur 購物與市區漫步',
+        nameEn: 'Laugavegur Shopping & City Walk',
+        description: '雷克雅維克的主街。這裡有許多冰島設計師品牌、紀念品店和特色咖啡廳。去 Kolaportið 週末市集逛逛（如果是週末的話），或者到 Tjörnin 托寧湖畔餵鳥。',
+        type: 'sight',
+        coordinates: { lat: 64.145, lng: -21.929 },
+        imageUrl: 'https://images.unsplash.com/photo-1531737212413-967f9a70b5fd?q=80&w=800&auto=format&fit=crop',
+        tips: ['推薦去 Kolaportið 週末跳蚤市集', '托寧湖 (Tjörnin) 就在旁邊'],
+        mustBuy: ['冰島毛衣 (Lopapeysa)', '66° North 服飾'],
+        driveInfo: { time: '10 min', distance: '1 km' }
       },
       {
         id: 'street-food',
