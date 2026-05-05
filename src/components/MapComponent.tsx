@@ -65,7 +65,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
       const { zoomToElement } = transformComponentRef.current;
       // Small timeout ensures the element exists in DOM and Map has calculated its position
       const timeoutId = setTimeout(() => {
-        zoomToElement(`marker-${selectedLocation.id}`, 3.5, 1000);
+        zoomToElement(`marker-${selectedLocation.id}`, 3.5, 600);
       }, 100);
       return () => clearTimeout(timeoutId);
     }
@@ -249,7 +249,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                         y={pos.y - (8 / Math.sqrt(scale))}
                         textAnchor="middle"
                         className="font-black serif fill-black"
-                        style={{ fontSize: `${Math.max(3.5, 9 / Math.sqrt(scale))}px` }}
+                        style={{ fontSize: `${Math.max(4.5, 12 / Math.sqrt(scale))}px` }}
                       >
                         {loc.name}
                       </text>
@@ -258,7 +258,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ locations, selectedL
                         y={pos.y - (4.5 / Math.sqrt(scale))}
                         textAnchor="middle"
                         className="font-bold uppercase tracking-widest fill-gray-500 serif"
-                        style={{ fontSize: `${Math.max(1.8, 4.5 / Math.sqrt(scale))}px` }}
+                        style={{ fontSize: `${Math.max(2.2, 6 / Math.sqrt(scale))}px` }}
                       >
                         {loc.nameEn}
                       </text>
