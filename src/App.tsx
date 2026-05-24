@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Compass, Calendar, Map, Info, ChevronRight, Menu, X, Share2, ArrowRight, Sun, Sunrise, Sunset, Filter, RefreshCw, Coins, Tag, Droplets, Search } from 'lucide-react';
 import { ITINERARY_DATA, DayPlan } from './data/itinerary';
+import { DAILY_WEATHER_DATA } from './data/weatherData';
 import { LocationItem } from './components/LocationItem';
 import { WeatherWidget } from './components/WeatherWidget';
 import { MapComponent } from './components/MapComponent';
@@ -69,42 +70,51 @@ export default function App() {
               transition={{ duration: 0.3 }}
             >
             {/* Day Header */}
-            <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-sm font-medium text-accent">{currentDayPlan.date}</span>
-                <WeatherWidget location={currentDayPlan.locationName} />
-              </div>
-              
-              {/* Daylight Info */}
-              <div className="flex items-center gap-4 mb-6 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                <div className="flex items-center gap-2">
-                  <Sunrise className="w-4 h-4 text-orange-400" />
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Sunrise</span>
-                    <span className="text-sm font-bold">06:12</span>
+            {(() => {
+              const dayWeather = DAILY_WEATHER_DATA[currentDayPlan.day] || {
+                sunrise: '04:00',
+                sunset: '23:30',
+                daylight: '19h 30m'
+              };
+              return (
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-sm font-medium text-accent">{currentDayPlan.date}</span>
+                    <WeatherWidget location={currentDayPlan.locationName} day={currentDayPlan.day} />
                   </div>
-                </div>
-                <div className="w-px h-6 bg-gray-200" />
-                <div className="flex items-center gap-2">
-                  <Sunset className="w-4 h-4 text-blue-400" />
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Sunset</span>
-                    <span className="text-sm font-bold">20:45</span>
+                  
+                  {/* Daylight Info */}
+                  <div className="flex items-center gap-4 mb-6 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                    <div className="flex items-center gap-2">
+                      <Sunrise className="w-4 h-4 text-orange-400" />
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Sunrise (日出)</span>
+                        <span className="text-sm font-bold">{dayWeather.sunrise}</span>
+                      </div>
+                    </div>
+                    <div className="w-px h-6 bg-gray-200" />
+                    <div className="flex items-center gap-2">
+                      <Sunset className="w-4 h-4 text-blue-400" />
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Sunset (日落)</span>
+                        <span className="text-sm font-bold">{dayWeather.sunset}</span>
+                      </div>
+                    </div>
+                    <div className="w-px h-6 bg-gray-200" />
+                    <div className="flex items-center gap-2">
+                      <Sun className="w-4 h-4 text-accent" />
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Daylight (日照)</span>
+                        <span className="text-sm font-bold">{dayWeather.daylight}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="w-px h-6 bg-gray-200" />
-                <div className="flex items-center gap-2">
-                  <Sun className="w-4 h-4 text-accent" />
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Daylight</span>
-                    <span className="text-sm font-bold">14h 33m</span>
-                  </div>
-                </div>
-              </div>
 
-              <h2 className="text-4xl font-bold serif leading-tight">{currentDayPlan.title}</h2>
-              <div className="h-1 w-12 bg-ink mt-4" />
-            </div>
+                  <h2 className="text-4xl font-bold serif leading-tight">{currentDayPlan.title}</h2>
+                  <div className="h-1 w-12 bg-ink mt-4" />
+                </div>
+              );
+            })()}
 
               {/* Timeline */}
               <div className="flex flex-col">
